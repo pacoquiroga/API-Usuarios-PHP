@@ -1,5 +1,9 @@
 <?php
 
+header("Access-Control-Allow-Origin: *"); // Permitir solicitudes desde cualquier origen
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); // Métodos permitidos
+header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Encabezados permitidos
+
 require 'vendor/autoload.php'; 
 
 use Firebase\JWT\JWT;
@@ -40,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($existingUser) {
             // Si el usuario ya existe
+            http_response_code(409);
             echo json_encode(["error" => "El correo electrónico ya está registrado con el nombre $existingUser[user_name]"]);
         } else {
             // Si no existe, realiza el INSERT

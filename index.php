@@ -64,10 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($error) {
         header('Content-Type: application/json');
+        http_response_code(404);
         echo json_encode(["error" => $error]);
     }
 } else {
     header('Content-Type: application/json');
+    http_response_code(404);
     echo json_encode(["error" => "Invalid request method"]);
 }
 ?>
